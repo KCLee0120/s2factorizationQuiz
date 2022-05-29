@@ -197,7 +197,7 @@ function factorizationType5(){
 }
 
 // Type6 : abxy^m+acx^nyz^i+adx^ny^kz, where x and y are unknowns, a is a random common factor, b is a positive constant and c is a negative constant
-function factorizationType6(id){
+function factorizationType6(){
   var unknowns = [
     ["a", "b", "c"], ["x", "y", "z"], ["p", "q", "r"]
   ];
@@ -246,12 +246,172 @@ function factorizationType6(id){
   return{question, option, answer};
 }
 
+// Type7 : ax(bx+cy)+d(bx+cy)
+function factorizationType7(){
+  var unknowns = [
+    ["a", "b"], ["x", "y"], ["p", "q"], ["m", "n"]
+  ];
+  var unknownNumber = getRndInteger(0, 3);
+  var a = getRndInteger(1, 8);
+  var b = getRndInteger(1, 5);
+  do{
+    var c = getRndInteger(-10, 10);
+  }while(c==0||gcd_two_numbers(b, c)!=1)
+  do{
+    var d = getRndInteger(-12, 12);
+  }while(d==0||gcd_two_numbers(a, d)!=1)
+
+  var question = "$" + value2FirstCoe(a) + unknowns[unknownNumber][0] + "(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")" + value2Coe(d) + "(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")$";
+  var correctOption = "$(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")(" + value2FirstCoe(a) + unknowns[unknownNumber][0] + value2Constant(d) + ")$";
+  var wrongOption1 = "$" + value2FirstCoe(a*d) + unknowns[unknownNumber][0] + "(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")$";
+  var wrongOption2 = "$" + value2FirstCoe(a+d) + unknowns[unknownNumber][0] + "(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")$";
+  var wrongOption3 = "$(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")(" + value2FirstCoe(a) + unknowns[unknownNumber][0] + value2Constant(-d) + ")$";
+  var option = [];
+
+  var randomOption = getRndInteger(0, 3);
+  if(randomOption==0)
+      var answer = "optionA";
+  else if (randomOption==1)
+      var answer = "optionB";
+  else if (randomOption==2)
+      var answer = "optionC";
+  else if (randomOption==3)
+      var answer = "optionD";
+  option[randomOption] = String.fromCharCode(randomOption+65) + ". " + correctOption;
+  option[(randomOption+1)%4] = String.fromCharCode((randomOption+1)%4+65) + ". " + wrongOption1;
+  option[(randomOption+2)%4] = String.fromCharCode((randomOption+2)%4+65) + ". " + wrongOption2;
+  option[(randomOption+3)%4] = String.fromCharCode((randomOption+3)%4+65) + ". " + wrongOption3;
+
+  return{question, option, answer};
+}
+
+// Type8 : ax(bx+cy)+dy(bx+cy)
+function factorizationType8(){
+  var unknowns = [
+    ["a", "b"], ["x", "y"], ["p", "q"], ["m", "n"]
+  ];
+  var unknownNumber = getRndInteger(0, 3);
+  var a = getRndInteger(1, 8);
+  var b = getRndInteger(1, 5);
+  do{
+    var c = getRndInteger(-10, 10);
+  }while(c==0||gcd_two_numbers(b, c)!=1)
+  do{
+    var d = getRndInteger(-12, 12);
+  }while(d==0||gcd_two_numbers(a, d)!=1)
+
+  var question = "$" + value2FirstCoe(a) + unknowns[unknownNumber][0] + "(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")" + value2Coe(d) + unknowns[unknownNumber][1] + "(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")$";
+  var correctOption = "$(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")(" + value2FirstCoe(a) + unknowns[unknownNumber][0] + value2Coe(d) + unknowns[unknownNumber][1] + ")$";
+  var wrongOption1 = "$" + value2FirstCoe(a*d) + unknowns[unknownNumber][0] + unknowns[unknownNumber][1] + "(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")$";
+  var wrongOption2 = "$" + value2FirstCoe(a+d) + unknowns[unknownNumber][0] + unknowns[unknownNumber][1] + "(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")$";
+  var wrongOption3 = "$(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")(" + value2FirstCoe(a) + unknowns[unknownNumber][0] + value2Coe(-d) + unknowns[unknownNumber][1] + ")$";
+  var option = [];
+
+  var randomOption = getRndInteger(0, 3);
+  if(randomOption==0)
+      var answer = "optionA";
+  else if (randomOption==1)
+      var answer = "optionB";
+  else if (randomOption==2)
+      var answer = "optionC";
+  else if (randomOption==3)
+      var answer = "optionD";
+  option[randomOption] = String.fromCharCode(randomOption+65) + ". " + correctOption;
+  option[(randomOption+1)%4] = String.fromCharCode((randomOption+1)%4+65) + ". " + wrongOption1;
+  option[(randomOption+2)%4] = String.fromCharCode((randomOption+2)%4+65) + ". " + wrongOption2;
+  option[(randomOption+3)%4] = String.fromCharCode((randomOption+3)%4+65) + ". " + wrongOption3;
+
+  return{question, option, answer};
+}
+
+//a(bx+cy)^2+d(bx+cy)
+function factorizationType9(){
+  var unknowns = [
+    ["a", "b"], ["x", "y"], ["p", "q"], ["m", "n"]
+  ];
+  var unknownNumber = getRndInteger(0, 3);
+  var a = getRndInteger(2, 8);
+  var b = getRndInteger(1, 5);
+  do{
+    var c = getRndInteger(-10, 10);
+  }while(c==0||gcd_two_numbers(b, c)!=1)
+  do{
+    var d = getRndInteger(-12, 12);
+  }while(d==0||gcd_two_numbers(a, d)!=1)
+
+  var question = "$" + value2FirstCoe(a) + "(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")^2" + value2Coe(d) + "(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")$";
+  var correctOption = "$(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")(" + value2FirstCoe(a*b) + unknowns[unknownNumber][0] + value2Coe(a*c) + unknowns[unknownNumber][1] + value2Constant(d) + ")$";
+  var wrongOption1 = "$(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + value2Constant(d) + ")$";
+  var wrongOption2 = "$" + value2FirstCoe(a) +"(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + value2Constant(d) + ")$";
+  var wrongOption3 = "$(" + value2FirstCoe(b) + unknowns[unknownNumber][0] + value2Coe(c) + unknowns[unknownNumber][1] + ")(" + value2FirstCoe(a*b) + unknowns[unknownNumber][0] + value2Coe(-a*c) + unknowns[unknownNumber][1] + value2Constant(-d) + ")$";
+  var option = [];
+
+  var randomOption = getRndInteger(0, 3);
+  if(randomOption==0)
+      var answer = "optionA";
+  else if (randomOption==1)
+      var answer = "optionB";
+  else if (randomOption==2)
+      var answer = "optionC";
+  else if (randomOption==3)
+      var answer = "optionD";
+  option[randomOption] = String.fromCharCode(randomOption+65) + ". " + correctOption;
+  option[(randomOption+1)%4] = String.fromCharCode((randomOption+1)%4+65) + ". " + wrongOption1;
+  option[(randomOption+2)%4] = String.fromCharCode((randomOption+2)%4+65) + ". " + wrongOption2;
+  option[(randomOption+3)%4] = String.fromCharCode((randomOption+3)%4+65) + ". " + wrongOption3;
+
+  return{question, option, answer};
+}
+
+//acxy+abx+cdy+bd
+function factorizationType10(){
+  var unknowns = [
+    ["a", "b"], ["x", "y"], ["p", "q"], ["m", "n"]
+  ];
+  var unknownNumber = getRndInteger(0, 3);
+  var a = getRndInteger(2, 8);
+  var b = getRndInteger(1, 5);
+  do{
+    var c = getRndInteger(1, 10);
+  }while(gcd_two_numbers(c, b)!=1);
+  do{
+    var d =getRndInteger(-6, -2);
+  }while(gcd_two_numbers(a, d)!=1);
+
+  var question = "$" + value2FirstCoe(a*c) + unknowns[unknownNumber][0] + unknowns[unknownNumber][1] + value2Coe(a*b) + unknowns[unknownNumber][0] + value2Coe(c*d) + unknowns[unknownNumber][1] + value2Coe(b*d) + "$";
+  var correctOption = "$(" + value2FirstCoe(c) + unknowns[unknownNumber][1] + value2Constant(b) + ")(" + value2FirstCoe(a) +  unknowns[unknownNumber][0] + value2Constant(d) + ")$";
+  var wrongOption1 = "$(" + value2FirstCoe(c) + unknowns[unknownNumber][1] + value2Constant(b) + ")(" + value2FirstCoe(a) +  unknowns[unknownNumber][0] + value2Constant(-d) + ")$";
+  var wrongOption2 = "$(" + value2FirstCoe(c) + unknowns[unknownNumber][1] + value2Constant(-b) + ")(" + value2FirstCoe(a) +  unknowns[unknownNumber][0] + value2Constant(d) + ")$";
+  var wrongOption3 = "$(" + value2FirstCoe(c) + unknowns[unknownNumber][1] + value2Constant(b) + ")(" + d + value2Coe(-a) + unknowns[unknownNumber][0] + ")$";
+  var option = [];
+
+  var randomOption = getRndInteger(0, 3);
+  if(randomOption==0)
+      var answer = "optionA";
+  else if (randomOption==1)
+      var answer = "optionB";
+  else if (randomOption==2)
+      var answer = "optionC";
+  else if (randomOption==3)
+      var answer = "optionD";
+  option[randomOption] = String.fromCharCode(randomOption+65) + ". " + correctOption;
+  option[(randomOption+1)%4] = String.fromCharCode((randomOption+1)%4+65) + ". " + wrongOption1;
+  option[(randomOption+2)%4] = String.fromCharCode((randomOption+2)%4+65) + ". " + wrongOption2;
+  option[(randomOption+3)%4] = String.fromCharCode((randomOption+3)%4+65) + ". " + wrongOption3;
+
+  return{question, option, answer};
+}
+
 var getType1Info = factorizationType1();
 var getType2Info = factorizationType2();
 var getType3Info = factorizationType3();
 var getType4Info = factorizationType4();
 var getType5Info = factorizationType5();
 var getType6Info = factorizationType6();
+var getType7Info = factorizationType7();
+var getType8Info = factorizationType8();
+var getType9Info = factorizationType9();
+var getType10Info = factorizationType10();
 
 // creating an array and passing the number, questions, options, and answers
 let questions = [
@@ -291,6 +451,30 @@ let questions = [
     answer: getType6Info.answer,
     options: getType6Info.option,
   },
+    {
+    numb: 7,
+    question: "因式分解 " + getType7Info.question + "。",
+    answer: getType7Info.answer,
+    options: getType7Info.option,
+  },
+    {
+    numb: 8,
+    question: "因式分解 " + getType8Info.question + "。",
+    answer: getType8Info.answer,
+    options: getType8Info.option,
+    },
+    {
+    numb: 9,
+    question: "因式分解 " + getType9Info.question + "。",
+    answer: getType9Info.answer,
+    options: getType9Info.option,
+    },
+    {
+    numb: 10,
+    question: "因式分解 " + getType10Info.question + "。",
+    answer: getType10Info.answer,
+    options: getType10Info.option,
+    },
   // you can uncomment the below codes and make duplicate as more as you want to add question
   // but remember you need to give the numb value serialize like 1,2,3,5,6,7,8,9.....
 
@@ -367,3 +551,4 @@ function value2Index(n){
   else if (n>1)
     return ("^" + n);
 }
+
