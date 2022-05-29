@@ -173,21 +173,26 @@ function showResult() {
   quiz_box.classList.remove("activeQuiz"); //hide quiz box
   result_box.classList.add("activeResult"); //show result box
   const scoreText = result_box.querySelector(".score_text");
-  if (userScore > 3) {
+  if (userScore > 8) {
     // if user scored more than 3
     //creating a new span tag and passing the user score number and total question number
     let scoreTag =
-      "<span>你答對了 " + userScore + " 題！你已經充分掌握提取公因式！</span>";
+      "<span>你答對了 " + userScore + " 題！做得唔錯！</span>";
     scoreText.innerHTML = scoreTag; //adding new span tag inside score_Text
-  } else if (userScore > 1) {
+  } else if (userScore > 5) {
     // if user scored more than 1
     let scoreTag =
-      "<span>你答對了 " + userScore + " 題！你已經初步掌握提取公因式！</span>";
+      "<span>你答對了 " + userScore + " 題！繼續努力！</span>";
+    scoreText.innerHTML = scoreTag;
+  } else if (userScore > 2) {
+    // if user scored less than 1
+    let scoreTag =
+      "<span>你答對了 " + userScore + " 題，仍有不少進步空間！</span>";
     scoreText.innerHTML = scoreTag;
   } else {
     // if user scored less than 1
     let scoreTag =
-      "<span>你答對了 " + userScore + " 題，仍有不少進步空間！</span>";
+      "<span>你答對了 " + userScore + " 題，唔好氣餒，再做多次！</span>";
     scoreText.innerHTML = scoreTag;
   }
 }
@@ -244,3 +249,4 @@ function queCounter(index) {
     "<span><p> " + questions.length + " 題中的第 " + index + "</p> 題。</span>";
   bottom_ques_counter.innerHTML = totalQueCounTag; //adding new span tag inside bottom_ques_counter
 }
+
